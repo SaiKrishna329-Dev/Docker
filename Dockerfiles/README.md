@@ -1,6 +1,6 @@
-**Important Dockerfile Instructions:**
+# **Important Dockerfile Instructions:**
 
-**FROM:**
+1.**FROM:**
 
 - The FROM instruction in a Dockerfile specifies the base image for building your Docker image. It is usually the first 
   instruction in a Dockerfile.
