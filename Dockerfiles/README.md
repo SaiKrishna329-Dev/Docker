@@ -74,7 +74,7 @@
     - The exec form, which is the preferred form:
 
          - ENTRYPOINT ["executable", "param1", "param2"]
-         
+
     - The shell form:
 
          - ENTRYPOINT command param1 param2
@@ -88,3 +88,17 @@
 
          - ENTRYPOINT exec_entry p1_entry         -- /bin/sh -c exec_entry p1_entry
          - ENTRYPOINT ["exec_entry", "p1_entry"]  -- exec_entry p1_entry
+
+
+**6.LABEL:**    
+  - The LABEL instruction adds metadata to an image. A LABEL is a key-value pair.
+  - An image can have more than one label. You can specify multiple labels on a single line.
+     
+     **Ex:**
+          - LABEL "com.example.vendor"="ACME Incorporated"
+            LABEL com.example.label-with-value="foo"
+            LABEL version="1.0"
+            LABEL description="This text illustrates \
+            that label-values can span multiple lines."     
+
+  - To view images labels -- docker image inspect --format='{{json .Config.Labels}}' myimage      
