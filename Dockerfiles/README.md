@@ -48,7 +48,7 @@
 
 **3.RUN:**
 - The RUN instruction will execute any commands to create a new layer on top of the current image. The added layer is used in the next step in the Dockerfile.
-- **Ex:** 
+  **Ex:** 
 
        Shell form: RUN [OPTIONS] <command> ...
        Exec form: RUN [OPTIONS] [ "<command>", ... ]
@@ -131,4 +131,23 @@
            RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y ...  
            OR
            ARG DEBIAN_FRONTEND=noninteractive
-           RUN apt-get update && apt-get install -y ...         
+           RUN apt-get update && apt-get install -y ...       
+
+
+**9.ADD or COPY:**   
+- ADD and COPY are functionally similar. COPY supports basic copying of files into the container, from the build context or from a stage in a multi-stage build. ADD supports features for fetching files from remote HTTPS and Git URLs, and extracting tar files automatically when adding files from the build context.
+
+  **Ex:**     
+
+           ADD file1.txt file2.txt /usr/src/things/.                            
+           ADD https://example.com/archive.zip /usr/src/things/
+           ADD git@github.com:user/repo.git /usr/src/things/ 
+
+- COPY accepts a flag **--from=<name>** that lets you specify the source location to be a build stage, context, or image. The following example copies files from a stage named build:  
+
+  **Ex:**
+
+           FROM golang AS build
+           WORKDIR /app
+           RUN --mount=type=bind,target=. go build -o /myapp ./cmd
+           COPY --from=build /myapp /usr/bin/
