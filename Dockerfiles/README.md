@@ -82,5 +82,6 @@
   - You can override the ENTRYPOINT instruction using the **docker run --entrypoint** flag.      
   - Only the last ENTRYPOINT instruction in the Dockerfile will have an effect. 
   - what command is executed for different ENTRYPOINT / CMD combinations: 
+  
          - ENTRYPOINT exec_entry p1_entry         -- /bin/sh -c exec_entry p1_entry
          - ENTRYPOINT ["exec_entry", "p1_entry"]  -- exec_entry p1_entry
