@@ -73,11 +73,11 @@
  - ENTRYPOINT has two possible forms:
     - The exec form, which is the preferred form:
 
-         - ENTRYPOINT ["executable", "param1", "param2"]
+         ENTRYPOINT ["executable", "param1", "param2"]
 
     - The shell form:
 
-         - ENTRYPOINT command param1 param2
+         ENTRYPOINT command param1 param2
 
  **NOTE:**
   - Command line arguments to docker run <image> will be appended after all elements in an exec form ENTRYPOINT, and will override all elements specified using 
