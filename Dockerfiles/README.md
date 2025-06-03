@@ -76,7 +76,7 @@
 
 
  **NOTE:**
-  - Command line arguments to **docker run <image>** will be appended after all elements in an exec form ENTRYPOINT, and will override all elements specified using 
+  - Command line arguments to **docker run image** will be appended after all elements in an exec form ENTRYPOINT, and will override all elements specified using 
     CMD.
   - You can override the ENTRYPOINT instruction using the **docker run --entrypoint** flag.      
   - Only the last ENTRYPOINT instruction in the Dockerfile will have an effect. 
@@ -112,8 +112,8 @@
 
 
 **8.ENV:**  
- - The ENV instruction sets the environment variable **<key>** to the value **<value>**. This value will be in the environment for all subsequent instructions in the build stage and can be replaced inline in many as well. 
- - The environment variables set using ENV will persist when a container is run from the resulting image. You can view the values using docker inspect, and change them using **docker run --env <key>=<value>**
+ - The ENV instruction sets the environment variable **key** to the **value**. This value will be in the environment for all subsequent instructions in the build stage and can be replaced inline in many as well. 
+ - The environment variables set using ENV will persist when a container is run from the resulting image. You can view the values using docker inspect, and change them using **docker run --env key=value**
 
     **Ex:**     
 
@@ -143,7 +143,7 @@
            ADD https://example.com/archive.zip /usr/src/things/
            ADD git@github.com:user/repo.git /usr/src/things/ 
 
-- COPY accepts a flag **--from=<name>** that lets you specify the source location to be a build stage, context, or image. The following example copies files from a stage named build:  
+- COPY accepts a flag **--from=name** that lets you specify the source location to be a build stage, context, or image. The following example copies files from a stage named build:  
 
   **Ex:**
 
@@ -151,3 +151,47 @@
            WORKDIR /app
            RUN --mount=type=bind,target=. go build -o /myapp ./cmd
            COPY --from=build /myapp /usr/bin/
+
+
+**10.USER:**
+- The USER instruction sets the user name (or UID) and optionally the user group (or GID) to use as the default user and group for the remainder of the current stage. The specified user is used for RUN instructions and at runtime, runs the relevant ENTRYPOINT and CMD commands.
+- Note that when specifying a group for the user, the user will have only the specified group membership. Any other configured group memberships will be ignored.
+
+ **Ex:**
+
+           USER <user>[:<group>]
+           USER <UID>[:<GID>]
+
+
+**11.WORKDIR:**     
+- The WORKDIR instruction sets the working directory for any RUN, CMD, ENTRYPOINT, COPY and ADD instructions that follow it in the Dockerfile. If the WORKDIR doesn't exist, it will be created even if it's not used in any subsequent Dockerfile instruction.
+- The WORKDIR instruction can be used multiple times in a Dockerfile. If a relative path is provided, it will be relative to the path of the previous WORKDIR instruction      
+
+**Ex:**
+
+             WORKDIR /a
+             WORKDIR b
+             WORKDIR c
+             RUN pwd   
+
+- The output of the final pwd command in this Dockerfile would be /a/b/c.
+
+
+**12.ONBUILD:**
+- The ONBUILD instruction adds to the image a trigger instruction to be executed at a later time, when the image is used as the base for another build. The trigger will be executed in the context of the downstream build, as if it had been inserted immediately after the FROM instruction in the downstream Dockerfile.
+  **HOW it Works:**
+     - When it encounters an ONBUILD instruction, the builder adds a trigger to the metadata of the image being built. The instruction doesn't otherwise affect the current build.
+     - At the end of the build, a list of all triggers is stored in the image manifest, under the key OnBuild. They can be inspected with the docker inspect command.
+     - Later the image may be used as a base for a new build, using the FROM instruction. As part of processing the FROM instruction, the downstream builder looks for ONBUILD triggers, and executes them in the same order they were registered. If any of the triggers fail, the FROM instruction is aborted which in turn causes the build to fail. If all triggers succeed, the FROM instruction completes and the build continues as usual.
+     - Triggers are cleared from the final image after being executed. In other words they aren't inherited by "grand-children" builds.
+
+     **Ex:**
+
+             ONBUILD ADD . /app/src
+             ONBUILD RUN /usr/local/bin/python-build --dir /app/src
+
+
+**13.STOPSIGNAL:**  
+- The STOPSIGNAL instruction sets the system call signal that will be sent to the container to exit. This signal can be a signal name in the format SIG<NAME>, for instance SIGKILL, or an unsigned number that matches a position in the kernel's syscall table, for instance 9. The default is SIGTERM if not defined.
+
+             STOPSIGNAL signal
