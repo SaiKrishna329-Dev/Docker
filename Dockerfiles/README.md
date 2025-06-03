@@ -72,9 +72,12 @@
  - An ENTRYPOINT allows you to configure a container that will run as an executable.
  - ENTRYPOINT has two possible forms:
     - The exec form, which is the preferred form:
-      ENTRYPOINT ["executable", "param1", "param2"]
+
+         - ENTRYPOINT ["executable", "param1", "param2"]
+         
     - The shell form:
-      ENTRYPOINT command param1 param2
+
+         - ENTRYPOINT command param1 param2
 
  **NOTE:**
   - Command line arguments to docker run <image> will be appended after all elements in an exec form ENTRYPOINT, and will override all elements specified using 
@@ -82,6 +85,6 @@
   - You can override the ENTRYPOINT instruction using the **docker run --entrypoint** flag.      
   - Only the last ENTRYPOINT instruction in the Dockerfile will have an effect. 
   - what command is executed for different ENTRYPOINT / CMD combinations: 
-  
+
          - ENTRYPOINT exec_entry p1_entry         -- /bin/sh -c exec_entry p1_entry
          - ENTRYPOINT ["exec_entry", "p1_entry"]  -- exec_entry p1_entry
