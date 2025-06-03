@@ -157,7 +157,7 @@
 - The USER instruction sets the user name (or UID) and optionally the user group (or GID) to use as the default user and group for the remainder of the current stage. The specified user is used for RUN instructions and at runtime, runs the relevant ENTRYPOINT and CMD commands.
 - Note that when specifying a group for the user, the user will have only the specified group membership. Any other configured group memberships will be ignored.
 
- **Ex:**
+  **Ex:**
 
            USER <user>[:<group>]
            USER <UID>[:<GID>]
@@ -167,7 +167,7 @@
 - The WORKDIR instruction sets the working directory for any RUN, CMD, ENTRYPOINT, COPY and ADD instructions that follow it in the Dockerfile. If the WORKDIR doesn't exist, it will be created even if it's not used in any subsequent Dockerfile instruction.
 - The WORKDIR instruction can be used multiple times in a Dockerfile. If a relative path is provided, it will be relative to the path of the previous WORKDIR instruction      
 
-**Ex:**
+  **Ex:**
 
              WORKDIR /a
              WORKDIR b
