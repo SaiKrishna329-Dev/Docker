@@ -86,8 +86,8 @@
   - Only the last ENTRYPOINT instruction in the Dockerfile will have an effect. 
   - what command is executed for different ENTRYPOINT / CMD combinations: 
 
-         - ENTRYPOINT exec_entry p1_entry         -- /bin/sh -c exec_entry p1_entry
-         - ENTRYPOINT ["exec_entry", "p1_entry"]  -- exec_entry p1_entry
+          ENTRYPOINT exec_entry p1_entry         -- /bin/sh -c exec_entry p1_entry
+          ENTRYPOINT ["exec_entry", "p1_entry"]  -- exec_entry p1_entry
 
 
 **6.LABEL:**    
@@ -96,10 +96,10 @@
      
      **Ex:**
 
-         - LABEL "com.example.vendor"="ACME Incorporated"
-         - LABEL com.example.label-with-value="foo"
-         - LABEL version="1.0"
-         - LABEL description="This text illustrates \
-           that label-values can span multiple lines."     
+          LABEL "com.example.vendor"="ACME Incorporated"
+          LABEL com.example.label-with-value="foo"
+          LABEL version="1.0"
+          LABEL description="This text illustrates \
+          that label-values can span multiple lines."     
 
   - To view images labels -- docker image inspect --format='{{json .Config.Labels}}' myimage      
