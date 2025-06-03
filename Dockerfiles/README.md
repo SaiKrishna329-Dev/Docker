@@ -49,15 +49,14 @@
 **3.RUN:**
 - The RUN instruction will execute any commands to create a new layer on top of the current image. The added layer is used in the next step in the Dockerfile.
 - **Ex:** 
-    - Shell form:
-      RUN [OPTIONS] <command> ...
-    - Exec form:
-      RUN [OPTIONS] [ "<command>", ... ]
-    - Shell form : 
-      RUN <<EOF
-      apt-get update
-      apt-get install -y curl
-      EOF     
+
+       Shell form: RUN [OPTIONS] <command> ...
+       Exec form: RUN [OPTIONS] [ "<command>", ... ]
+       Shell form : 
+         RUN <<EOF
+         apt-get update
+         apt-get install -y curl
+         EOF     
 
 
 **4.CMD:**   
@@ -77,7 +76,7 @@
 
 
  **NOTE:**
-  - Command line arguments to docker run <image> will be appended after all elements in an exec form ENTRYPOINT, and will override all elements specified using 
+  - Command line arguments to **docker run <image>** will be appended after all elements in an exec form ENTRYPOINT, and will override all elements specified using 
     CMD.
   - You can override the ENTRYPOINT instruction using the **docker run --entrypoint** flag.      
   - Only the last ENTRYPOINT instruction in the Dockerfile will have an effect. 
@@ -113,9 +112,9 @@
 
 
 **8.ENV:**  
- - The ENV instruction sets the environment variable <key> to the value <value>. This value will be in the environment for all subsequent instructions in the build stage and can be replaced inline in many as well. 
- - The environment variables set using ENV will persist when a container is run from the resulting image. You can view the values using docker inspect, and change them using docker run --env <key>=<value>.
- 
+ - The ENV instruction sets the environment variable **<key>** to the value **<value>**. This value will be in the environment for all subsequent instructions in the build stage and can be replaced inline in many as well. 
+ - The environment variables set using ENV will persist when a container is run from the resulting image. You can view the values using docker inspect, and change them using **docker run --env <key>=<value>**
+
     **Ex:**     
 
            ENV MY_NAME="John Doe"
