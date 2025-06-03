@@ -99,4 +99,14 @@
           LABEL description="This text illustrates \
           that label-values can span multiple lines."     
 
-  - To view images labels -- docker image inspect --format='{{json .Config.Labels}}' myimage      
+  - To view images labels -- docker image inspect --format='{{json .Config.Labels}}' myimage    
+
+
+**7.EXPOSE:**    
+  - The EXPOSE instruction informs Docker that the container listens on the specified network ports at runtime. You can specify whether the port listens on TCP  
+  or UDP, and the default is TCP if you don't specify a protocol.
+  - The EXPOSE instruction doesn't actually publish the port. It functions as a type of documentation between the person who builds the image and the person who runs the container, about which ports are intended to be published.
+  - **Ex:**
+
+           EXPOSE 80/tcp
+           EXPOSE 80/udp
