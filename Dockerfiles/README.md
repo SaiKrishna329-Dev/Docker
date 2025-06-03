@@ -95,10 +95,11 @@
   - An image can have more than one label. You can specify multiple labels on a single line.
      
      **Ex:**
-          - LABEL "com.example.vendor"="ACME Incorporated"
-            LABEL com.example.label-with-value="foo"
-            LABEL version="1.0"
-            LABEL description="This text illustrates \
-            that label-values can span multiple lines."     
+
+         - LABEL "com.example.vendor"="ACME Incorporated"
+         - LABEL com.example.label-with-value="foo"
+         - LABEL version="1.0"
+         - LABEL description="This text illustrates \
+           that label-values can span multiple lines."     
 
   - To view images labels -- docker image inspect --format='{{json .Config.Labels}}' myimage      
