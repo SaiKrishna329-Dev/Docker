@@ -106,7 +106,30 @@
   - The EXPOSE instruction informs Docker that the container listens on the specified network ports at runtime. You can specify whether the port listens on TCP  
   or UDP, and the default is TCP if you don't specify a protocol.
   - The EXPOSE instruction doesn't actually publish the port. It functions as a type of documentation between the person who builds the image and the person who runs the container, about which ports are intended to be published.
-  - **Ex:**
+   **Ex:**
 
            EXPOSE 80/tcp
            EXPOSE 80/udp
+
+
+**8.ENV:**  
+ - The ENV instruction sets the environment variable <key> to the value <value>. This value will be in the environment for all subsequent instructions in the build stage and can be replaced inline in many as well. 
+ - The environment variables set using ENV will persist when a container is run from the resulting image. You can view the values using docker inspect, and change them using docker run --env <key>=<value>.
+ 
+    **Ex:**     
+
+           ENV MY_NAME="John Doe"
+           ENV MY_DOG=Rex\ The\ Dog
+           ENV MY_CAT=fluffy   
+
+      Or, in a single line
+
+           ENV MY_NAME="John Doe" MY_DOG=Rex\ The\ Dog \
+           MY_CAT=fluffy   
+
+  - If an environment variable is only needed during build, and not in the final image, consider setting a value for a single command instead: 
+
+           RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y ...  
+           OR
+           ARG DEBIAN_FRONTEND=noninteractive
+           RUN apt-get update && apt-get install -y ...         
