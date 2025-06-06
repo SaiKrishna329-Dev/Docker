@@ -38,13 +38,13 @@ Volumes are persistent data stores for containers, created and managed by Docker
 
 **Syntax:**
 
-    - To mount a volume with the docker run command, you can use either the --mount or --volume flag.
+ - To mount a volume with the docker run command, you can use either the --mount or --volume flag.
 
                          docker run --mount type=volume,src=volume-name,dst=mount-path
                          docker run --volume volume-name:mount-path 
-                         
 
-    - You can create a volume directly outside of Compose using docker volume create and then reference it inside compose.yaml as follows:   
+
+ - You can create a volume directly outside of Compose using docker volume create and then reference it inside compose.yaml as follows:   
 
 
                  services:
