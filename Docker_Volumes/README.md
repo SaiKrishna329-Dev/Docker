@@ -37,11 +37,15 @@ Volumes are persistent data stores for containers, created and managed by Docker
  - If you create multiple containers consecutively that each use anonymous volumes, each container creates its own volume. Anonymous volumes aren't reused or shared between containers automatically. To share an anonymous volume between two or more containers, you must mount the anonymous volume using the random volume ID. 
 
 **Syntax:**
-    - To mount a volume with the docker run command, you can use either the --mount or --volume flag.
-                         docker run --mount type=volume,src=<volume-name>,dst=<mount-path>
-                         docker run --volume <volume-name>:<mount-path> 
 
-    - You can create a volume directly outside of Compose using docker volume create and then reference it inside compose.yaml as follows:    
+    - To mount a volume with the docker run command, you can use either the --mount or --volume flag.
+
+                         docker run --mount type=volume,src=volume-name,dst=mount-path
+                         docker run --volume volume-name:mount-path 
+                         
+
+    - You can create a volume directly outside of Compose using docker volume create and then reference it inside compose.yaml as follows:   
+
 
                  services:
                    frontend:
