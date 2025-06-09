@@ -1,11 +1,20 @@
 FROM node:latest
+
 ENV ENV=production \
     APP=banking
+
 WORKDIR /app
+
 COPY package*.json .   #why not ADD? -- to copy these kind of simple files copy is cleanr, faster and more predictable. 
+
 RUN npm ci --only=production  # instead of npm install, it will help in CICD or prod to reduce the size of the image
+
 COPY . .
+
 EXPOSE 3290
+
 RUN useradd -m saikrishna
+
 USER saikrishna
+
 CMD ["node", "index.js"]
