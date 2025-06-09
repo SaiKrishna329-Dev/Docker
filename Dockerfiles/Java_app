@@ -1,0 +1,19 @@
+FROM openjdk:19-jdk-alpine3.16
+
+WORKDIR /app
+
+ENV ENVIRONMENT=staging \
+    REGION=central-india \
+    APP_NAME=java
+
+COPY compile.jar .
+
+RUN adduser -D saikrishna
+
+USER saikrishna
+
+EXPOSE 3290
+
+HEALTHCHECK CMD wget --spider http://localhost:3290 || exit 1
+
+ENTRYPOINT ["java", "-jar", "/app/compile.jar"]
